@@ -1,0 +1,268 @@
+.roles-section {
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  z-index: 10;
+}
+
+.roles-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.5rem;
+}
+
+.roles-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.roles-subheading {
+  font-size: 0.95rem;
+  color: var(--text);
+  margin: 0;
+  max-width: 440px;
+}
+
+.roles-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.role-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 80px 1fr 60px;
+  align-items: center;
+  padding: 2.2rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  outline: none;
+}
+
+.role-item:hover,
+.role-item:focus-visible {
+  background: var(--bg-card);
+  padding-left: 2rem;
+}
+
+.role-index {
+  font-size: 1rem;
+  color: var(--text);
+  opacity: 0.6;
+  font-weight: 600;
+}
+
+.role-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.role-title-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.role-title {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.2vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-h);
+  transition: color 0.2s ease;
+}
+
+.role-item:hover .role-title {
+  color: var(--accent);
+}
+
+.role-pill {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent-glow);
+}
+
+.role-desc {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text);
+  max-width: 720px;
+}
+
+.role-tags {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.role-tag-badge {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  opacity: 0.7;
+}
+
+.role-arrow {
+  display: flex;
+  justify-content: flex-end;
+  color: var(--text);
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.role-item:hover .role-arrow {
+  opacity: 1;
+  color: var(--accent);
+  transform: translateX(6px);
+}
+
+/* Trailing Video Cursor Bubble (Chapter 09) */
+.role-cursor-follower {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.25s ease;
+  will-change: transform;
+}
+
+.role-cursor-follower.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cursor-card {
+  width: 280px;
+  padding: 1rem;
+  border-radius: 18px;
+  background: rgba(18, 19, 27, 0.88);
+  border: 1px solid color-mix(in srgb, var(--card-accent) 40%, rgba(255, 255, 255, 0.15));
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6),
+              0 0 30px -10px var(--card-accent);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cursor-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cursor-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--card-accent);
+  box-shadow: 0 0 8px var(--card-accent);
+}
+
+.cursor-title {
+  font-size: 0.72rem;
+  color: #f3f4f6;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.cursor-visual-wrapper {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #090a0f;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cursor-hologram {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hologram-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--card-accent) 1px, transparent 1px);
+  background-size: 14px 14px;
+  opacity: 0.35;
+  animation: gridShift 8s linear infinite;
+}
+
+@keyframes gridShift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(14px, 14px); }
+}
+
+.hologram-pulse {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid var(--card-accent);
+  opacity: 0.7;
+  animation: hologramPulse 2.4s ease-out infinite;
+}
+
+@keyframes hologramPulse {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.hologram-badge {
+  position: relative;
+  z-index: 2;
+  font-size: 0.65rem;
+  padding: 0.25rem 0.6rem;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid var(--card-accent);
+  border-radius: 999px;
+  color: #ffffff;
+}
+
+.cursor-card-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: #94a3b8;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .role-item {
+    grid-template-columns: 40px 1fr 30px;
+    padding: 1.6rem 0.5rem;
+  }
+  .role-cursor-follower {
+    display: none; /* Disable cursor trailer on touch screens */
+  }
+}

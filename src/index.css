@@ -1,0 +1,477 @@
+@import "tailwindcss";
+
+:root {
+  --text: #9ea3b5;           /* body copy */
+  --text-h: #ffffff;         /* headings - crisp clean white */
+  --bg: #090a0f;             /* Deep obsidian cyber black */
+  --bg-subtle: #11131c;
+  --bg-card: #151824;
+  --border: #232738;
+  --accent: #ff6200;         /* Electric Solar Orange */
+  --accent-light: #ff8533;
+  --accent-glow: rgba(255, 98, 0, 0.45);
+  --accent-bg: rgba(255, 98, 0, 0.12);
+
+  --sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --variable-font: 'Roboto Flex', sans-serif;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ea3b5;
+    --text-h: #ffffff;
+    --bg: #0a0b0e;           /* Rich deep obsidian cyber black */
+    --bg-subtle: #12131b;
+    --bg-card: #161822;
+    --border: #242838;
+    --accent: #ff6b1a;       /* Lighter energetic solar amber */
+    --accent-light: #ff944d;
+    --accent-glow: rgba(255, 107, 26, 0.5);
+    --accent-bg: rgba(255, 107, 26, 0.14);
+  }
+}
+
+/* Explicit Theme Overrides */
+[data-theme="dark"] {
+  --text: #9ea3b5;
+  --text-h: #ffffff;
+  --bg: #0a0b0e;
+  --bg-subtle: #12131b;
+  --bg-card: #161822;
+  --border: #242838;
+  --accent: #ff6b1a;
+  --accent-light: #ff944d;
+  --accent-glow: rgba(255, 107, 26, 0.5);
+  --accent-bg: rgba(255, 107, 26, 0.14);
+}
+
+[data-theme="light"] {
+  --text: #595561;
+  --text-h: #110e14;
+  --bg: #fcfbfa;
+  --bg-subtle: #f5f3f0;
+  --bg-card: #ebe8e3;
+  --border: #ded9d0;
+  --accent: #ff5500;
+  --accent-light: #ff7733;
+  --accent-glow: rgba(255, 85, 0, 0.35);
+  --accent-bg: rgba(255, 85, 0, 0.08);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+/* Hide scrollbars (Chapter 04, page 10) */
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  scroll-behavior: auto;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Site container and layout */
+.site-main {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  z-index: 10;
+  overflow: clip;
+}
+
+.site-main.page-rise {
+  animation: pageRise 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageRise {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Proximity font utilities */
+.variable-font {
+  font-family: var(--variable-font);
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+/* Cyber Glassmorphism helpers */
+.glass-panel {
+  background: color-mix(in srgb, var(--bg-card) 75%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+}
+
+.glow-pill {
+  border: 1px solid var(--border);
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+/* Glowing Accent Highlights */
+.orange-glow {
+  box-shadow: 0 0 25px -5px var(--accent-glow);
+}
+
+/* ==========================================================================
+   Interactive UI & Mobile Responsiveness Enhancements
+   ========================================================================== */
+
+/* 1. Intro Loader Skip Button */
+.intro-skip-btn {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  z-index: 10000;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #efe9d8;
+  font-family: Archivo, system-ui, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.intro-skip-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .intro-skip-btn {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    font-size: 0.72rem;
+    padding: 0.4rem 0.85rem;
+  }
+}
+
+/* 2. Top Navigation & Let's Chat Button */
+.nav-btn.nav-chat {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 0.45rem 1.15rem;
+  border-radius: 999px;
+  color: #ffffff;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-btn.nav-chat:hover {
+  background: linear-gradient(135deg, #f97b0c, #e0531f);
+  border-color: #f97b0c;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(249, 123, 12, 0.45);
+  transform: translateY(-1px);
+}
+
+.nav-btn.nav-chat .nav-arrow {
+  transition: transform 0.25s ease;
+}
+
+.nav-btn.nav-chat:hover .nav-arrow {
+  transform: translate(2px, -1px);
+}
+
+.menu-link-chat {
+  color: #f97b0c !important;
+  font-style: italic;
+}
+
+.menu-link-chat-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #e0531f;
+  font-family: Archivo, Georgia, serif;
+  font-size: clamp(38px, 9vw, 90px);
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  transition: all 0.3s ease;
+}
+
+.menu-link-chat-btn:hover {
+  color: #f97b0c;
+  transform: scale(1.03);
+}
+
+/* 3. Hero Reveal Balanced Cinematic Aesthetic (Matches End of Site) */
+.reveal {
+  background: #090a0f !important;
+}
+
+.reveal-img {
+  filter: contrast(1.05) brightness(0.92) saturate(0.9) !important;
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+}
+
+.reveal-top {
+  /* Elegant warm bronze depth - non-glaring, rich dark cinematic tone */
+  filter: contrast(1.08) brightness(0.95) saturate(0.98) sepia(0.08) hue-rotate(-6deg) !important;
+}
+
+/* Smooth dark cinematic vignette to blend into obsidian background */
+.reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(ellipse 95% 85% at 50% 45%, rgba(9, 10, 15, 0.05) 30%, rgba(9, 10, 15, 0.55) 75%, rgba(9, 10, 15, 0.92) 100%);
+  mix-blend-mode: multiply;
+}
+
+.reveal.is-forced .reveal-top {
+  -webkit-mask: none !important;
+  mask: none !important;
+  display: block !important;
+}
+
+.reveal.is-forced .reveal-shape,
+.reveal.is-forced .reveal-edge,
+.reveal.is-forced .reveal-edge-glow {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.reveal-scrim-top {
+  background: linear-gradient(to bottom, rgba(9, 10, 15, 0.9) 0%, rgba(9, 10, 15, 0.35) 45%, transparent 100%) !important;
+  height: 28vh !important;
+}
+
+.reveal-scrim-bottom {
+  background: linear-gradient(to top, rgba(9, 10, 15, 0.95) 0%, rgba(9, 10, 15, 0.55) 35%, transparent 100%) !important;
+  height: 38vh !important;
+}
+
+.reveal-hint-badge {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 5;
+  font-family: Archivo, system-ui, sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(239, 233, 216, 0.85);
+  background: rgba(14, 16, 24, 0.78);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 640px) {
+  .reveal-hint-badge {
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.62rem;
+    padding: 0.35rem 0.75rem;
+  }
+}
+
+/* 4. Featured Works Mobile & Touch Optimization */
+@media (max-width: 820px), (hover: none) {
+  .proj-slide {
+    margin-bottom: 0.75rem;
+  }
+
+  .proj-slide:after {
+    opacity: 0.85 !important;
+    background: linear-gradient(to top, rgba(5, 6, 10, 0.96) 0%, rgba(5, 6, 10, 0.65) 50%, transparent 100%) !important;
+  }
+
+  .proj-info {
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+    padding: 20px 22px !important;
+    background: linear-gradient(to top, rgba(8, 10, 16, 0.98) 0%, rgba(8, 10, 16, 0.8) 65%, transparent 100%) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .proj-line,
+  .proj-name,
+  .proj-desc,
+  .proj-links {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .proj-name {
+    font-size: clamp(22px, 5.5vw, 30px) !important;
+    color: #ffffff !important;
+    margin-bottom: 4px !important;
+  }
+
+  .proj-desc {
+    font-size: 13.5px !important;
+    line-height: 1.45 !important;
+    opacity: 0.9 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .proj-links {
+    margin-top: 10px !important;
+    gap: 12px !important;
+    display: flex !important;
+  }
+
+  .proj-links a {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 7px 16px !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 999px !important;
+    font-weight: 600 !important;
+    font-size: 11.5px !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    letter-spacing: 0.08em !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .proj-links a:active,
+  .proj-links a:hover {
+    background: #f97b0c !important;
+    border-color: #f97b0c !important;
+    color: #ffffff !important;
+  }
+}
+
+/* 5. Contact Section Mobile Responsiveness */
+@media (max-width: 820px) {
+  .contact-panel {
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 3rem 1.5rem !important;
+    gap: 2rem !important;
+  }
+
+  .cr-heading {
+    text-align: center !important;
+    font-size: clamp(32px, 8.5vw, 56px) !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .cr-right {
+    align-items: center !important;
+    gap: 22px !important;
+  }
+
+  .cr-email {
+    font-size: clamp(18px, 4.8vw, 26px) !important;
+    word-break: break-all !important;
+  }
+
+  .cr-socials {
+    justify-content: center !important;
+    gap: 20px !important;
+  }
+}
+
+/* 6. Roles Section Mobile Polish */
+@media (max-width: 820px), (hover: none) {
+  .roles-cursor-vid {
+    display: none !important;
+  }
+
+  .roles-item {
+    font-size: clamp(28px, 7.5vw, 44px) !important;
+    padding: 8px 0 !important;
+    opacity: 0.9 !important;
+  }
+
+  .roles-eyebrow {
+    margin-bottom: 32px !important;
+    font-size: 11px !important;
+    letter-spacing: 0.16em !important;
+  }
+}
+
+/* 7. Hero Section Typography on Small Devices */
+@media (max-width: 720px) {
+  .hero-headline {
+    font-size: clamp(34px, 9vw, 68px) !important;
+    line-height: 1.04 !important;
+  }
+
+  .hero-rotating-word {
+    word-break: break-word !important;
+  }
+
+  .hero-vid-btn {
+    width: 1.25em !important;
+    height: 0.72em !important;
+  }
+
+  .hero-since {
+    font-size: 14px !important;
+    bottom: 90px !important;
+  }
+}
+
+/* 8. Footer Wordmark Polish */
+@media (max-width: 720px) {
+  .footer-wordmark {
+    font-size: clamp(3.2rem, 18vw, 8.5rem) !important;
+  }
+}
+

@@ -1,0 +1,170 @@
+.hero-reveal-runway {
+  position: relative;
+  width: 100%;
+  padding: 4rem 1.5rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.amoeba-svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-reveal-stage {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  width: min(520px, 90vw);
+  aspect-ratio: 3 / 4;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.45),
+              0 0 0 1px color-mix(in srgb, var(--border) 60%, transparent);
+  cursor: crosshair;
+  background-color: var(--bg-card);
+  outline: none;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.hero-reveal-stage:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent), 0 30px 80px -20px rgba(0, 0, 0, 0.5);
+}
+
+.reveal-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  overflow: hidden;
+}
+
+.portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Layer 1 (Bottom): Creative persona */
+.reveal-bottom {
+  z-index: 1;
+}
+
+/* Layer 2 (Top): Formal persona with amoeba hole punched */
+.reveal-top {
+  z-index: 2;
+  transition: opacity 0.4s ease;
+  will-change: mask-image, -webkit-mask-image;
+}
+
+.hero-reveal-stage.is-active .reveal-top {
+  -webkit-mask-image: radial-gradient(
+    circle 180px at var(--mx) var(--my),
+    transparent 96%,
+    black 100%
+  );
+  mask-image: radial-gradient(
+    circle 180px at var(--mx) var(--my),
+    transparent 96%,
+    black 100%
+  );
+  /* Organic wobbling edge via SVG filter */
+  filter: url(#amoebaDistort);
+}
+
+/* Keyboard accessibility forced mode */
+.hero-reveal-stage.is-forced .reveal-top {
+  opacity: 0;
+}
+
+/* Prefers reduced motion: smoothly cross-fades without aggressive mask */
+.hero-reveal-stage.is-reduced:hover .reveal-top {
+  opacity: 0.15;
+}
+
+.portrait-badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
+}
+
+.portrait-badge-formal {
+  background: rgba(18, 19, 25, 0.7);
+  color: #f3f4f6;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.badge-dot-formal {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.portrait-badge-ai {
+  background: rgba(28, 16, 10, 0.88);
+  color: var(--accent-light);
+  border: 1px solid var(--accent-glow);
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.reveal-instruction {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: rgba(10, 11, 16, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  color: #e2e8f0;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.hero-reveal-stage.is-active .reveal-instruction {
+  opacity: 0.25;
+}
+
+.instruction-icon {
+  color: var(--accent);
+}
+
+.instruction-key {
+  color: #94a3b8;
+  font-size: 0.65rem;
+}

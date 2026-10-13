@@ -1,0 +1,114 @@
+.site-footer {
+  position: relative;
+  width: 100%;
+  padding: 5rem 2rem 2rem;
+  background-color: var(--bg);
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+  z-index: 5;
+}
+
+.footer-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 1280px;
+  margin: 0 auto 4rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2rem;
+}
+
+.footer-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.footer-col-title {
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  font-weight: 600;
+}
+
+.footer-col-value {
+  font-size: 0.85rem;
+  color: var(--text-h);
+  font-weight: 500;
+}
+
+.footer-back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 999px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-h);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.footer-back-to-top:hover {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+.footer-wordmark-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  overflow: hidden;
+  margin: 1rem 0 3rem;
+}
+
+.footer-wordmark {
+  margin: 0;
+  font-size: clamp(3.8rem, 14vw, 15rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  color: color-mix(in srgb, var(--text-h) 8%, transparent);
+  text-align: center;
+  white-space: nowrap;
+  transition: color 0.4s ease;
+}
+
+.footer-wordmark:hover {
+  color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.footer-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--text);
+  opacity: 0.8;
+}
+
+.footer-copyright,
+.footer-quote {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .footer-top-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

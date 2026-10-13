@@ -1,0 +1,14 @@
+.vft-root {
+  display: inline-block;
+  font-family: var(--variable-font);
+  font-optical-sizing: auto;
+  line-height: 1.05;
+  user-select: none;
+  cursor: default;
+}
+
+.vft-letter {
+  display: inline-block;
+  will-change: font-variation-settings;
+  transform: translateZ(0);
+}
